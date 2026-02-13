@@ -2,14 +2,13 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const conectarDB = require("./backend/config/db");
-
 
 // Routers
 const authRoutes = require("./backend/routes/auth.routes");
 const taskRoutes = require("./backend/routes/task.routes");
-
 
 const app = express();
 
@@ -25,14 +24,19 @@ app.use(cors());
 app.use(express.json());
 
 // ======================
-// Ruta de prueba
+// Servir archivos estáticos (frontend)
+// ======================
+app.use(express.static(__dirname));
+
+// ======================
+// Ruta principal → index.html
 // ======================
 app.get("/", (req, res) => {
-  res.send("🚀 Servidor funcionando correctamente en el puerto " + PORT);
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // ======================
-// Rutas principales
+// Rutas principales API
 // ======================
 app.use("/auth", authRoutes);
 app.use("/tasks", taskRoutes);
@@ -52,11 +56,13 @@ app.listen(PORT, () => {
   console.log(`
 ✅ Servidor activo en http://localhost:${PORT}
 
-Rutas disponibles:
-- GET  /                 → prueba
-- POST /auth/register    → registro
-- POST /auth/login       → login
-- GET  /tasks            → ver tareas
-- POST /tasks            → crear tarea
+Frontend:
+- GET  / → index.html
+
+API:
+- POST /auth/register
+- POST /auth/login
+- GET  /tasks
+- POST /tasks
 `);
 });
