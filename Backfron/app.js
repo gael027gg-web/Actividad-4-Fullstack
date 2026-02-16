@@ -92,7 +92,7 @@ if (btnLogin) {
 
     try {
       // Ruta corregida: /auth/login
-      const res = await fetch("http://localhost:3000/auth/login", {
+      const res = await fetch("https://actividad-4-fullstack-3acb.onrender.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
