@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ===================== */
 
   
-const API_URL = "http://localhost:3000/tasks";
+const API_URL = "https://actividad-4-fullstack-3acb.onrender.com/tasks";
 
   async function apiGetTareas() {
     const res = await fetch(API_URL, {
